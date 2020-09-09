@@ -6,10 +6,10 @@
 }
  %>
  Welcome to Vulnerable Web App !<br/><br/>
- Can You Break the App ?
+ Can You find the vulnerability ?
  <br/><br/>
  
- An intentional vulnerable Web Application.
+ ( An intentional vulnerable Web Application )
  <br/><br/>
  
   <%@ include file="footer.jsp" %>

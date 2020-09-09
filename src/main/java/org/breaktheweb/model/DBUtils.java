@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.model;
+package org.breaktheweb.model;
 
  
 import java.io.FileInputStream;
@@ -17,9 +17,9 @@ import java.util.Properties;
 
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class DBConnect {
+public class DBUtils {
     public Connection connect(String path) throws IOException,ClassNotFoundException,SQLException
     {
         Properties properties=new Properties();

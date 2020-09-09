@@ -1,20 +1,20 @@
-package org.cysecurity.cspf.jvl.model;
+package org.breaktheweb.model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class HashMe {
-    public static String hashMe(String str) 
+public class HashingUtil {
+    public static String hashPassword(String password) 
     {
          StringBuffer sb=null;
         try
         {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(str.getBytes());
+            md.update(password.getBytes());
             byte byteData[] = md.digest();
             sb= new StringBuffer();
             for (int i = 0; i < byteData.length; i++) 

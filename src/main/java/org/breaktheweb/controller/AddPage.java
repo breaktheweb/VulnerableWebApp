@@ -4,25 +4,23 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.controller;
+package org.breaktheweb.controller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.cysecurity.cspf.jvl.model.DBConnect;
-import org.json.JSONObject;
 
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class EmailCheck extends HttpServlet {
+public class AddPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,27 +33,37 @@ public class EmailCheck extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("application/json");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-               Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
-               String email=request.getParameter("email").trim();
-               JSONObject json=new JSONObject();
-                if(con!=null && !con.isClosed())
+           String fileName=request.getParameter("filename");
+           String content=request.getParameter("content");
+           if(fileName!=null && content!=null)
+           {
+            String pagesDir=getServletContext().getRealPath("/pages");
+            String filePath=pagesDir+"/"+fileName;
+            File f=new File(filePath);
+            if(f.exists())
+            {
+                f.delete();
+            }
+                if(f.createNewFile())
                 {
-                    ResultSet rs=null;
-                    Statement stmt = con.createStatement();  
-                    rs=stmt.executeQuery("select * from users where email='"+email+"'");
-                    if (rs.next()) 
-                    {  
-                     json.put("available", "1"); 
-                    }  
-                    else
-                    {  
-                      json.put("available", new Integer(0));  
-                    }  
+                    BufferedWriter bw=new BufferedWriter(new FileWriter(f.getAbsoluteFile()));
+                    bw.write(content);
+                    bw.close();
+                    out.print("Successfully created the file: <a href='../pages/"+fileName+"'>"+fileName+"</a>");
                 }
-                out.print(json);
+                else
+                {
+                    out.print("Failed to create the file");
+                }
+           }
+           else
+           {
+               out.print("filename or content Parameter is missing");
+           }           
+           
         } 
         catch(Exception e)
         {
@@ -89,7 +97,7 @@ public class EmailCheck extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);

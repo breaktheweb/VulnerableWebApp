@@ -4,23 +4,27 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.controller;
+package org.breaktheweb.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.cysecurity.cspf.jvl.model.DBConnect;
- 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class SendMessage extends HttpServlet {
+public class xxe extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,40 +38,30 @@ public class SendMessage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-             try
-             {
-                 PrintWriter out = response.getWriter();
-                 Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
-                            String recipient=request.getParameter("recipient");
-                    String subject=request.getParameter("subject");
-                 String msg=request.getParameter("msg");
-                 String sender=request.getParameter("sender");
-                    if(con!=null && !con.isClosed() && request.getParameter("send")!=null)
-                        {
-                           //PreparedStatement to Prevent SQL Injection attack:       
-                            PreparedStatement pstmt=con.prepareStatement("INSERT into UserMessages(recipient, sender, subject, msg) values (?,?,?,?)");
-                            pstmt.setString(1, recipient);
-                            pstmt.setString(2, sender);
-                            pstmt.setString(3, subject);
-                            pstmt.setString(4, msg);
-                            pstmt.executeUpdate();
-                            response.sendRedirect(request.getContextPath()+"/vulnerability/SendMessage.jsp?status=<b style='color:green'>* Message successfully sent *</b>");
-                                    
-                               }
-                    else
-                    {
-                           response.sendRedirect(request.getContextPath()+"/vulnerability/SendMessage.jsp?status=<b style='color:red'>* Something Went Wrong</b>");
-                           
-                    }
-                }
-               catch(Exception ex)
-                {
-                       response.sendRedirect(request.getContextPath()+"/vulnerability/SendMessage.jsp?status=<b style='color:red'>* Something Went Wrong</b><br/>"+ex);
-                           
-                }                 
-            
-       
+        PrintWriter out = response.getWriter();
+        try
+        {
+          InputStream xml=request.getInputStream();
+          DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+          DocumentBuilder builder = factory.newDocumentBuilder();
+          InputSource is = new InputSource(xml); 	
+          Document doc = builder.parse(is);
+          Element element = doc.getDocumentElement();
+          NodeList nodes = element.getChildNodes();
+          out.print("<br/>Result:<br/>");
+          out.print("---------------------<br/>");
+          for (int i = 0; i < nodes.getLength(); i++) {
+            out.print(nodes.item(i).getNodeName()+" : " + nodes.item(i).getFirstChild().getNodeValue().toString());
+            out.print("<br/>");
+         }
+        }
+        catch(Exception ex)
+        {
+            out.print(ex);
+        }
+        finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

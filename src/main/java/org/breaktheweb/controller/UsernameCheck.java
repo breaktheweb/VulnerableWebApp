@@ -4,26 +4,26 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.controller;
+package org.breaktheweb.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.cysecurity.cspf.jvl.model.DBConnect;
+
+import org.breaktheweb.model.DBUtils;
+import org.json.JSONObject;
 
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class Register extends HttpServlet {
+public class UsernameCheck extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,49 +35,35 @@ public class Register extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-       try {
-            PrintWriter out = response.getWriter();
-            Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
-         String user=request.getParameter("username");
-          String pass=request.getParameter("password");
-          String email=request.getParameter("email");
-          String about=request.getParameter("About");
-          String secret=request.getParameter("secret");
-          if(secret==null || secret.equals(""))
-          {
-              secret="nosecret";
-          }
-            try
-             {
-                    if(con!=null && !con.isClosed())
-                               {
-                                  
-                                   Statement stmt = con.createStatement();  
-                                  stmt.executeUpdate("INSERT into users(username, password, email, About,avatar,privilege,secretquestion,secret) values ('"+user+"','"+pass+"','"+email+"','"+about+"','default.jpg','user',1,'"+secret+"')");
-                                       stmt.executeUpdate("INSERT into UserMessages(recipient, sender, subject, msg) values ('"+user+"','admin','Hi','Hi<br/> This is admin of this page. <br/> Welcome to Our Forum')");
-             
-                                    response.sendRedirect("index.jsp");
-                                    
-                               }
-                    else
-                    {
-                         response.sendRedirect("Register.jsp");
-                    }
-                }
-               catch(SQLException ex)
+            throws ServletException, IOException  {
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        try {
+               Connection con=new DBUtils().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
+               String user=request.getParameter("username").trim();
+               JSONObject json=new JSONObject();
+                if(con!=null && !con.isClosed())
                 {
-                          System.out.println("SQLException: " + ex.getMessage());
-                         System.out.println("SQLState: " + ex.getSQLState());
-                         System.out.println("VendorError: " + ex.getErrorCode());
-                           
-                       }
-        
-          }
+                    ResultSet rs=null;
+                    Statement stmt = con.createStatement();  
+                    rs=stmt.executeQuery("select * from users where username='"+user+"'");
+                    if (rs.next()) 
+                    {  
+                     json.put("available", "1"); 
+                    }  
+                    else
+                    {  
+                      json.put("available", new Integer(0));  
+                    }  
+                }
+                out.print(json);
+        } 
         catch(Exception e)
         {
-            
+            out.print(e);
+        }
+        finally {
+            out.close();
         }
     }
 

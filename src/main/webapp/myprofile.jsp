@@ -6,12 +6,12 @@
 <%@page import="java.sql.ResultSetMetaData"%>
 <%@page import="java.sql.ResultSet"%>
 <%@ page import="java.util.*,java.io.*"%>
-<%@ page import="org.cysecurity.cspf.jvl.model.DBConnect"%>
+<%@ page import="org.breaktheweb.model.DBUtils"%>
 
 <%
-if(session.getAttribute("isLoggedIn")!=null)
+	if(session.getAttribute("isLoggedIn")!=null)
 {
- Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
+ Connection con=new DBUtils().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
          
    String id=request.getParameter("id");
    if(id!=null && !id.equals(""))
@@ -59,7 +59,6 @@ else
 {
     out.print("Please login to see Your Profile");
 }
-
-  %>
+%>
   
  <%@ include file="/footer.jsp" %>

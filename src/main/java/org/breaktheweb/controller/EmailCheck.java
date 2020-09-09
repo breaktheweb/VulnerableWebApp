@@ -4,20 +4,26 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.controller;
+package org.breaktheweb.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.breaktheweb.model.DBUtils;
+import org.json.JSONObject;
+
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class Open extends HttpServlet {
+public class EmailCheck extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,23 +36,35 @@ public class Open extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-         try {
-            PrintWriter out = response.getWriter();
-           String url=request.getParameter("url");
-           if(url!=null)
-           {
-              response.sendRedirect(url);
-           }
-           else
-           {
-               out.print("Missing url parameter");
-           }
+         response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        try {
+               Connection con=new DBUtils().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
+               String email=request.getParameter("email").trim();
+               JSONObject json=new JSONObject();
+                if(con!=null && !con.isClosed())
+                {
+                    ResultSet rs=null;
+                    Statement stmt = con.createStatement();  
+                    rs=stmt.executeQuery("select * from users where email='"+email+"'");
+                    if (rs.next()) 
+                    {  
+                     json.put("available", "1"); 
+                    }  
+                    else
+                    {  
+                      json.put("available", new Integer(0));  
+                    }  
+                }
+                out.print(json);
+        } 
+        catch(Exception e)
+        {
+            out.print(e);
         }
-         catch(Exception e)
-         {
-             
-         }
+        finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +90,7 @@ public class Open extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);

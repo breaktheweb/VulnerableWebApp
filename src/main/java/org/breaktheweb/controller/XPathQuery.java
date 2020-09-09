@@ -4,71 +4,70 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.controller;
+package org.breaktheweb.controller;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 
+import org.w3c.dom.Document;
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class AddPage extends HttpServlet {
+public class XPathQuery extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
+            
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-           String fileName=request.getParameter("filename");
-           String content=request.getParameter("content");
-           if(fileName!=null && content!=null)
-           {
-            String pagesDir=getServletContext().getRealPath("/pages");
-            String filePath=pagesDir+"/"+fileName;
-            File f=new File(filePath);
-            if(f.exists())
+            String user=request.getParameter("username");
+            String pass=request.getParameter("password");
+            
+            //XML Source:
+            String XML_SOURCE=getServletContext().getRealPath("/WEB-INF/users.xml");
+            
+            //Parsing XML:
+            DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(true);
+            DocumentBuilder builder=factory.newDocumentBuilder();
+            Document xDoc=builder.parse(XML_SOURCE);
+            
+            XPath xPath=XPathFactory.newInstance().newXPath();
+            
+            //XPath Query:
+            String xPression="/users/user[username='"+user+"' and password='"+pass+"']/name";
+            
+            //running Xpath query:
+            String name=xPath.compile(xPression).evaluate(xDoc);
+            out.println(name);
+            if(name.isEmpty())
             {
-                f.delete();
+                response.sendRedirect(response.encodeURL("ForwardMe?location=/vulnerability/Injection/xpath_login.jsp?err=Invalid Credentials"));
             }
-                if(f.createNewFile())
-                {
-                    BufferedWriter bw=new BufferedWriter(new FileWriter(f.getAbsoluteFile()));
-                    bw.write(content);
-                    bw.close();
-                    out.print("Successfully created the file: <a href='../pages/"+fileName+"'>"+fileName+"</a>");
-                }
-                else
-                {
-                    out.print("Failed to create the file");
-                }
-           }
-           else
-           {
-               out.print("filename or content Parameter is missing");
-           }           
-           
+            else
+            {
+                 HttpSession session=request.getSession();
+                 session.setAttribute("isLoggedIn", "1");
+                  session.setAttribute("user", name);
+                 response.sendRedirect(response.encodeURL("ForwardMe?location=/index.jsp"));                                  
+            }
         } 
         catch(Exception e)
         {
             out.print(e);
-        }
+        }        
         finally {
             out.close();
         }

@@ -4,28 +4,27 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.controller;
+package org.breaktheweb.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.cysecurity.cspf.jvl.model.DBConnect;
- 
- 
+
+import org.breaktheweb.model.DBUtils;
 
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
-public class LoginValidator extends HttpServlet {
+public class Register extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,48 +37,51 @@ public class LoginValidator extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       
-       String user=request.getParameter("username").trim();
-          String pass=request.getParameter("password").trim();
-           try
+        response.setContentType("text/html;charset=UTF-8");
+       try {
+            PrintWriter out = response.getWriter();
+            Connection con=new DBUtils().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
+         String user=request.getParameter("username");
+          String pass=request.getParameter("password");
+          String email=request.getParameter("email");
+          String about=request.getParameter("About");
+          String secret=request.getParameter("secret");
+          if(secret==null || secret.equals(""))
+          {
+              secret="nosecret";
+          }
+            try
              {
-                 Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
                     if(con!=null && !con.isClosed())
                                {
-                                   ResultSet rs=null;
+                                  
                                    Statement stmt = con.createStatement();  
-                                   rs=stmt.executeQuery("select * from users where username='"+user+"' and password='"+pass+"'");
-                                   if(rs != null && rs.next()){
-                                   HttpSession session=request.getSession();
-                                   session.setAttribute("isLoggedIn", "1");
-                                   session.setAttribute("userid", rs.getString("id"));
-                                   session.setAttribute("user", rs.getString("username"));
-                                   session.setAttribute("avatar", rs.getString("avatar"));
-                                   Cookie privilege=new Cookie("privilege","user");
-                                   response.addCookie(privilege);
-                                   if(request.getParameter("RememberMe")!=null)
-                                   {
-                                       Cookie username=new Cookie("username",user);
-                                       Cookie password=new Cookie("password",pass);
-                                       response.addCookie(username);
-                                        response.addCookie(password);
-                                   }
-                                   response.sendRedirect(response.encodeURL("ForwardMe?location=/index.jsp"));
-                                   }
-                                   else
-                                   {
-                                          response.sendRedirect("ForwardMe?location=/login.jsp&err=Invalid Username or Password");
-                                   }
+                                  stmt.executeUpdate("INSERT into users(username, password, email, About,avatar,privilege,secretquestion,secret) values ('"+user+"','"+pass+"','"+email+"','"+about+"','default.jpg','user',1,'"+secret+"')");
+                                       stmt.executeUpdate("INSERT into UserMessages(recipient, sender, subject, msg) values ('"+user+"','admin','Hi','Hi<br/> This is admin of this page. <br/> Welcome to Our Forum')");
+             
+                                    response.sendRedirect("index.jsp");
                                     
                                }
+                    else
+                    {
+                         response.sendRedirect("Register.jsp");
+                    }
                 }
-               catch(Exception ex)
+               catch(SQLException ex)
                 {
-                           response.sendRedirect("login.jsp?err=something went wrong");
-                 }
+                          System.out.println("SQLException: " + ex.getMessage());
+                         System.out.println("SQLState: " + ex.getSQLState());
+                         System.out.println("VendorError: " + ex.getErrorCode());
+                           
+                       }
         
+          }
+        catch(Exception e)
+        {
+            
+        }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

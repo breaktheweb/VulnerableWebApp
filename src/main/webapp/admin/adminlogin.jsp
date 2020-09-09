@@ -1,15 +1,15 @@
- <%@page import="org.cysecurity.cspf.jvl.model.HashMe"%>
+ <%@page import="org.breaktheweb.model.HashingUtil"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="org.cysecurity.cspf.jvl.model.DBConnect"%>
+<%@page import="org.breaktheweb.model.DBUtils"%>
 <%@page import="java.sql.Connection"%>
 <%
-if(request.getParameter("Login")!=null)
+	if(request.getParameter("Login")!=null)
 {
-     Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
+     Connection con=new DBUtils().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
      String user=request.getParameter("username");
-     String pass=HashMe.hashMe(request.getParameter("password")); //Hashed Password 
+     String pass=HashingUtil.hashPassword(request.getParameter("password")); //Hashed Password 
      try
              {
                     if(con!=null && !con.isClosed())
@@ -42,10 +42,10 @@ if(request.getParameter("Login")!=null)
                          response.sendRedirect("adminlogin.jsp?err=<span style='color:red'>Something went wrong</span>");
                 
                 }
-			     catch(Exception e)
-			     {
-			    	 response.sendRedirect("adminlogin.jsp?err="+e);			
-			     }
+	     catch(Exception e)
+	     {
+	    	 response.sendRedirect("adminlogin.jsp?err="+e);			
+	     }
 }
 %>
 <%@ include file="/header.jsp" %>

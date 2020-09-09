@@ -1,4 +1,4 @@
-    package org.cysecurity.cspf.jvl.controller;
+    package org.breaktheweb.controller;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,11 +19,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.cysecurity.cspf.jvl.model.HashMe;
+
+import org.breaktheweb.model.HashingUtil;
 
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
 public class Install extends HttpServlet {
 
@@ -58,7 +59,7 @@ public class Install extends HttpServlet {
         dbname = request.getParameter("dbname");
         siteTitle= request.getParameter("siteTitle");
         adminuser= request.getParameter("adminuser");
-        adminpass= HashMe.hashMe(request.getParameter("adminpass"));
+        adminpass= HashingUtil.hashPassword(request.getParameter("adminpass"));
         
         //Moifying Configuration Properties:
          Properties config=new Properties();
@@ -162,7 +163,7 @@ public class Install extends HttpServlet {
                                 //Files List Table Creation
                                 stmt.executeUpdate("Create table FilesList(fileid int NOT NULL AUTO_INCREMENT,path text,primary key (fileid))");
                                 stmt.executeUpdate("INSERT into FilesList(path) values ('/docs/doc1.pdf')");
-                                 stmt.executeUpdate("INSERT into FilesList(path) values ('/docs/exampledoc.pdf')");
+                                 stmt.executeUpdate("INSERT into FilesList(path) values ('/docs/doc2.pdf')");
                                 
                                 return true;
                             }

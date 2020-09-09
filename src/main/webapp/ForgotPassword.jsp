@@ -1,5 +1,5 @@
 
- <%@page import="org.cysecurity.cspf.jvl.model.DBConnect"%>
+ <%@page import="org.breaktheweb.model.DBUtils"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
@@ -34,21 +34,20 @@ Password Recovery:
 </form><br/>
  
 <%
-if(request.getParameter("secret")!=null)
-             {
-                 Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
-                  ResultSet rs=null;
-                  Statement stmt = con.createStatement();  
-                  rs=stmt.executeQuery("select * from users where username='"+request.getParameter("username").trim()+"' and secret='"+request.getParameter("secret")+"'");
-                  if(rs != null && rs.next()){
-                      out.print("Hello "+rs.getString("username")+", <b class='success'> Your Password is: "+rs.getString("password"));
-                  }
-                  else
-                  {
-                      out.print("<b class='fail'> Secret/Email is wrong</b>");
-                  }
-             }
-                  
-%>
+ 	if(request.getParameter("secret")!=null)
+              {
+                  Connection con=new DBUtils().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
+                   ResultSet rs=null;
+                   Statement stmt = con.createStatement();  
+                   rs=stmt.executeQuery("select * from users where username='"+request.getParameter("username").trim()+"' and secret='"+request.getParameter("secret")+"'");
+                   if(rs != null && rs.next()){
+                       out.print("Hello "+rs.getString("username")+", <b class='success'> Your Password is: "+rs.getString("password"));
+                   }
+                   else
+                   {
+                       out.print("<b class='fail'> Secret/Email is wrong</b>");
+                   }
+              }
+ %>
                
   <%@ include file="footer.jsp" %>

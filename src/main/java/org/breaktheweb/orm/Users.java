@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package org.cysecurity.cspf.jvl.model.orm;
+package org.breaktheweb.orm;
 
 /**
  *
- * @author breakthesec
+ * @author famous-five
  */
 public class Users {
     Long id;

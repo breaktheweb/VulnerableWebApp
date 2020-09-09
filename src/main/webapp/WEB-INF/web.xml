@@ -6,51 +6,51 @@
 
  <servlet>
         <servlet-name>Install</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.Install</servlet-class>
+        <servlet-class>org.breaktheweb.controller.Install</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>loginValidator</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.LoginValidator</servlet-class>
+        <servlet-class>org.breaktheweb.controller.LoginValidator</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.Register</servlet-class>
+        <servlet-class>org.breaktheweb.controller.Register</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.Logout</servlet-class>
+        <servlet-class>org.breaktheweb.controller.Logout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Open</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.Open</servlet-class>
+        <servlet-class>org.breaktheweb.controller.Open</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SendMessage</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.SendMessage</servlet-class>
+        <servlet-class>org.breaktheweb.controller.SendMessage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForwardMe</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.ForwardMe</servlet-class>
+        <servlet-class>org.breaktheweb.controller.ForwardMe</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddPage</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.AddPage</servlet-class>
+        <servlet-class>org.breaktheweb.controller.AddPage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsernameCheck</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.UsernameCheck</servlet-class>
+        <servlet-class>org.breaktheweb.controller.UsernameCheck</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EmailCheck</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.EmailCheck</servlet-class>
+        <servlet-class>org.breaktheweb.controller.EmailCheck</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>XPathQuery</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.XPathQuery</servlet-class>
+        <servlet-class>org.breaktheweb.controller.XPathQuery</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>xxe</servlet-name>
-        <servlet-class>org.cysecurity.cspf.jvl.controller.xxe</servlet-class>
+        <servlet-class>org.breaktheweb.controller.xxe</servlet-class>
     </servlet>
    
     <servlet-mapping>
