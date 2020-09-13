@@ -1,8 +1,8 @@
- <%@page import="org.breaktheweb.model.HashingUtil"%>
+ <%@page import="org.breaktheweb.utils.HashingUtil"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
-<%@page import="org.breaktheweb.model.DBUtils"%>
+<%@page import="org.breaktheweb.utils.DBUtils"%>
 <%@page import="java.sql.Connection"%>
 <%
 	if(request.getParameter("Login")!=null)

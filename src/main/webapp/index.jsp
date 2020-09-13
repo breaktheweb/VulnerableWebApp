@@ -5,11 +5,13 @@
     out.print("Hello "+session.getAttribute("user")+",");
 }
  %>
- Welcome to Vulnerable Web App !<br/><br/>
+ <h3>
+ <br/><br/>
+ <br/><br/>
+<center class="monospace">Welcome to Vulnerable Web App ! <br/><br/>
  Can You find the vulnerability ?
  <br/><br/>
  
- ( An intentional vulnerable Web Application )
- <br/><br/>
+ <br/><br/></center></h3>
  
   <%@ include file="footer.jsp" %>

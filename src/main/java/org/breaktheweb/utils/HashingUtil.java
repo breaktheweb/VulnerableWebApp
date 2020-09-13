@@ -1,4 +1,4 @@
-package org.breaktheweb.model;
+package org.breaktheweb.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

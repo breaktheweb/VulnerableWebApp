@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.breaktheweb.orm;
+package org.breaktheweb.model;
 
 /**
  *
@@ -12,7 +12,7 @@ package org.breaktheweb.orm;
  */
 public class Users {
     Long id;
-    String username;
+    String userName;
     String about;
     
     public Long getId() {
@@ -22,10 +22,10 @@ public class Users {
         this.id = id;
     }
     public String getUsername() {
-        return username;
+        return userName;
     }
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
     public String getAbout() {
         return about;

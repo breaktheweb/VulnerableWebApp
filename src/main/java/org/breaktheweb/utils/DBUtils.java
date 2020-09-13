@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 
-package org.breaktheweb.model;
+package org.breaktheweb.utils;
 
  
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

@@ -13,14 +13,15 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement; 
+import java.sql.Statement;
 import java.util.Properties;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.breaktheweb.model.HashingUtil;
+import org.breaktheweb.utils.HashingUtil;
 
 /**
  *
@@ -58,9 +59,10 @@ public class Install extends HttpServlet {
         dbpass = request.getParameter("dbpass");
         dbname = request.getParameter("dbname");
         siteTitle= request.getParameter("siteTitle");
-        adminuser= request.getParameter("adminuser");
-        adminpass= HashingUtil.hashPassword(request.getParameter("adminpass"));
-        
+       // adminuser= request.getParameter("adminuser");
+        //adminpass= HashingUtil.hashPassword(request.getParameter("adminpass"));
+        adminuser="admin";
+        adminpass="admin$1234";
         //Moifying Configuration Properties:
          Properties config=new Properties();
          config.load(new FileInputStream(configPath));
@@ -115,7 +117,7 @@ public class Install extends HttpServlet {
                         {
                             //Database creation
                              Statement stmt = con.createStatement();  
-                             stmt.executeUpdate("DROP DATABASE IF EXISTS "+dbname);
+                            // stmt.executeUpdate("DROP DATABASE IF EXISTS "+dbname);
                              
                              stmt.executeUpdate("CREATE DATABASE "+dbname);
                              con.close();
@@ -126,7 +128,7 @@ public class Install extends HttpServlet {
                                 //User Table creation
                                 stmt.executeUpdate("Create table users(ID int NOT NULL AUTO_INCREMENT, username varchar(30),email varchar(60), password varchar(60), about varchar(50),privilege varchar(20),avatar TEXT,secretquestion int,secret varchar(30),primary key (id))");
                                   stmt.executeUpdate("INSERT into users(username, password, email,About,avatar, privilege,secretquestion,secret) values ('"+adminuser+"','"+adminpass+"','admin@localhost','I am the admin of this application','default.jpg','admin',1,'rocky')");
-                                  stmt.executeUpdate("INSERT into users(username, password, email,About,avatar, privilege,secretquestion,secret) values ('victim','victim','victim@localhost','I am the victim of this application','default.jpg','user',1,'max')");
+                                  stmt.executeUpdate("INSERT into users(username, password, email,About,avatar, privilege,secretquestion,secret) values ('victim','victim21','victim@localhost','I am the victim of this application','default.jpg','user',1,'max')");
                                   stmt.executeUpdate("INSERT into users(username, password, email,About,avatar, privilege,secretquestion,secret) values ('attacker','attacker','attacker@localhost','I am the attacker of this application','default.jpg','user',1,'bella')");
                                 stmt.executeUpdate("INSERT into users(username, password, email,About,avatar, privilege,secretquestion,secret) values ('NEO','trinity','neo@matrix','I am the NEO','default.jpg','user',1,'sentinel')");
                                 stmt.executeUpdate("INSERT into users(username, password, email,About,avatar, privilege,secretquestion,secret) values ('trinity','NEO','trinity@matrix','it is Trinity','default.jpg','user',1,'sentinel')");

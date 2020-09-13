@@ -2,8 +2,11 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@ include file="/header.jsp" %>
- <%
-      out.print("<br/>Team Famous Five - famous-five@irissoftware.com <br/><a href=https://www.irissoftware.com/ target=_blank>Site Link</a>");
-  %>
 
+
+ <br/><br/>
+<center class="about">Team Famous Five - famous-five@irissoftware.com
+ <br/><br/><br/><a class="linkdata" href=https://www.irissoftware.com/ target=_blank>Click to visit our site</a></h3>
+ 
+ 
  <%@ include file="/footer.jsp" %>

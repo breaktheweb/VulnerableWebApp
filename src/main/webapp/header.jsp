@@ -25,7 +25,7 @@
 		<ul id="menu-bar" style="margin-left: auto ;  margin-right: auto ;" >
 			<li class="current"><a href="<%=path%>">Home</a></li>
 			
-			<li><a href="#">Vulnerability</a>
+			<li><a href="#">Possible Vulnerability</a>
 				<ul>
 				
 			
@@ -42,19 +42,11 @@
 	                             <ul>
 									  <li><a href="<%=path%>/vulnerability/Injection/xpath_login.jsp">Login Bypass</a></li>
 	                             </ul>
-	                        </li>                      
-	                        <li><a href="#">V3 - XML Injection</a>
-	                             <ul>
-									  <li><a href="<%=path%>/vulnerability/Injection/xxe.jsp">External Entity</a></li>
-	                                  <li><a href="<%=path%>/vulnerability/Injection/xslt.jsp?style=1.xsl">XSLT Injection</a></li>
-	                                                 
-	                             </ul>
-	                        </li>                   
-	                        <li><a href="<%=path%>/vulnerability/Injection/orm.jsp?id=1">V4 - ORM Injection</a></li>                             
+	                        </li>                                                                      
 						
                 
                                    
-                 <li><a href="#">V5 - Broken Authentication & Session Management</a>
+                 <li><a href="#">V3 - Broken Authentication & Session Management</a>
                         <ul>
                             <li><a href="<%=path%>/ForgotPassword.jsp">UserName Enumeration</a></li>
                             <li><a href="<%=path%>/login.jsp">Brute Foce Login Page</a></li>
@@ -64,7 +56,7 @@
                         </ul>
                  </li>
                                         
-			   	 <li><a href="#">V6 - XSS</a>
+			   	 <li><a href="#">V4 - XSS</a>
 				        <ul>
 						     <li><a href="#">Reflected(GET)</a>
 							 	 	<ul>
@@ -85,7 +77,7 @@
 						
 				</li>
 					
-				<li><a href="#">V7 - Insecure Direct Object References</a>
+				<li><a href="#">V5 - Insecure Direct Object References</a>
 					<ul>
                         <li><a href="<%=path%>/myprofile.jsp?id=<% if(session.getAttribute("userid")!=null){ out.print(session.getAttribute("userid"));} %>" title="Make sure you have logged in ">Viewing Details</a>
 						</li>
@@ -96,16 +88,15 @@
 					</ul>
 				</li>
 				
-				<li><a href="#">V8 - Security Misconfiguration</a>
+				<li><a href="#">V6 - Security Misconfiguration</a>
 					<ul>
-						<li><a href="<%=path%>/install.jsp">Setup Page not removed</a></li>		
 						<li><a href="<%=path%>/admin/">Default Admin Credentials not changed</a></li>
                         <li><a href="<%=path%>/vulnerability/securitymisconfig/pages.jsp?id=1">Error Handling</a></li>
 
 					</ul>
 				</li>
 				
-				<li><a href="#">V9 - Sensitive Data Exposure</a>
+				<li><a href="#">V7 - Sensitive Data Exposure</a>
 					<ul>
 						<li><a href="<%=path%>/changeCardDetails.jsp">Cleartext Transmission of Sensitive Information</a></li>		
 						<li><a href="<%=path%>/ForgotPassword.jsp">Storing Login Credentials in Plain Text</a></li>	
@@ -114,7 +105,7 @@
 					</ul>
 				</li>
 				
-				<li><a href="#">V10 - Missing Function Level Access Control</a>
+				<li><a href="#">V8 - Missing Function Level Access Control</a>
 					<ul>                
                         <li> <a href="<%=path%>/admin/" title="Hint: Forced Browsing">Challenge 1:Bypass Admin Login</a></li>
                         <li> <a href="<%=path%>/admin/AddPage.jsp"> Challenge 2: Add Page</a></li>
@@ -123,14 +114,14 @@
         			</ul>
               	</li>
 					
-				<li><a href="#">V11 - CSRF</a>
+				<li><a href="#">V9 - CSRF</a>
 						<ul>
                             <li><a href="<%=path%>/vulnerability/csrf/change-info.jsp">CSRF 1(GET): Change Info</a></li>
 							<li><a href="<%=path%>/vulnerability/csrf/changepassword.jsp">CSRF 2(POST): Change Password</a></li>
 						</ul>
 				</li>
                 
-                <li><a href="#">V12 - Unvalidated Redirect & Forward..</a>
+                <li><a href="#">V10 - Unvalidated Redirect & Forward..</a>
 						<ul>
 							<li><a href="<%=path%>/vulnerability/unvalidated/OpenURL.jsp">Open Redirect</a></li>
 							<li><a href="<%=path%>/vulnerability/unvalidated/OpenForward.jsp">Open Forward</a></li>

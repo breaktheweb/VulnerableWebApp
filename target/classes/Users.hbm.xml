@@ -5,7 +5,7 @@
  
 <hibernate-mapping>
  
-    <class name="org.breaktheweb.model.Users" table="users">
+    <class name="org.breaktheweb.orm.Users" table="users">
  
         <id name="id" column="ID">
             <generator class="native" />

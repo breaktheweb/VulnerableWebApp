@@ -6,7 +6,7 @@
 <%@page import="java.sql.ResultSetMetaData"%>
 <%@page import="java.sql.ResultSet"%>
 <%@ page import="java.util.*,java.io.*"%>
-<%@ page import="org.breaktheweb.model.DBUtils"%>
+<%@ page import="org.breaktheweb.utils.DBUtils"%>
 
 <%
 	if(session.getAttribute("isLoggedIn")!=null)

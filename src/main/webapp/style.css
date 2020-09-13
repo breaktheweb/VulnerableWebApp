@@ -2,10 +2,26 @@
 	margin: 0px;
 	padding: 0px;
 }
+.monospace {
+  font-family: "Lucida Console", Courier, monospace;
+  color: tomato;
+  font-size: 25px;
+}
+.about {
+  font-family: "Times New Roman", Times, serif;
+  color: #ff5029;
+  font-size: 25px;
+  text-decoration: none;
+}
+.linkdata{
+  font-family: "Lucida Console", Courier, monospace;
+  color: #00ffb8d9;
+  font-size: 28px
+}
 body {
 	padding-top: 0px;
 	background:url("images/bw.png") #20230be0;
-	color: #008080;
+	color: #6f8825f2;
 	font-family: verdana, arial, sans-serif;
 	
 	text-align: left;
@@ -13,6 +29,8 @@ body {
 }
 a { color: #ff5029;font-size: 14px;text-decoration:none;}
 a:hover {color: #01a9c0;}
+
+
 .more{float: right; font-size: 11px; color: #add8f9; font-weight: bold; text-decoration: none;}
 .clear{clear:both;}
 p{	margin: 20px 0px 20px 0px;line-height: 16px;font-size: 14px;}
@@ -20,6 +38,17 @@ p{	margin: 20px 0px 20px 0px;line-height: 16px;font-size: 14px;}
 	margin-left: auto ;
 	margin-right: auto ;
 	width:873px;
+}
+.foot{
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 40px;
+    padding: 0 16.5em;
+    background: #000000;
+    color: #67e606;
+    margin: -20px;
+    border-radius: 10px 10px;
 }
 .success
 {
@@ -30,6 +59,7 @@ p{	margin: 20px 0px 20px 0px;line-height: 16px;font-size: 14px;}
     color:red;
 }
 #Main-Container{
+	background:url("images/bg.png") #20230be0;
 	width:750px;
 	border-radius: 15px;
   -webkit-border-radius: 15px;
@@ -81,7 +111,7 @@ width:500px;
 	border: none 0px #FFFFFF;
 }
 #menu-bar {
-	    background: #00807a;
+	    background: #720080;
 width:680px;
   margin: 0px 0px 0px 0px;
   padding: 6px 6px 0px 6px;
