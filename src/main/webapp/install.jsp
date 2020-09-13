@@ -5,7 +5,7 @@
  
 <form action="Install" method="POST">
 <table> 
-    <tr><td>Website Title:</td> <td><input type="text" name="siteTitle" value="Vulnerable Web App"/></td></tr>
+    <tr><td>Website Title:</td> <td><input type="text" name="siteTitle" value="BREAKING WEB"/></td></tr>
     <tr><td>Database Name:</td> <td><input type="text" name="dbname" value="vulnerable"/></td></tr>
     <tr><td>Database User:</td> <td><input type="text" name="dbuser" value="root"/></td></tr>
      <tr><td>Database Password:</td> <td><input type="text" name="dbpass" value="root"/></td></tr>
