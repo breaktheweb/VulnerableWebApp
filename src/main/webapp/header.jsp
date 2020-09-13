@@ -61,9 +61,7 @@
 						     <li><a href="#">Reflected(GET)</a>
 							 	 	<ul>
 										<li> <a href="<%=path%>/vulnerability/xss/search.jsp">Challenge 1</a></li>
-										<li> <a href="<%=path%>/vulnerability/xss/xss2.jsp">Challenge 2</a></li>
-										<li> <a href="<%=path%>/vulnerability/xss/xss3.jsp">Challenge 3</a></li>
-										<li> <a href="<%=path%>/vulnerability/xss/xss4.jsp">Challenge 4</a></li>
+										<li> <a href="<%=path%>/vulnerability/xss/xss4.jsp">Challenge 2</a></li>
 							       	 </ul>
 						      </li>
 							
@@ -87,15 +85,12 @@
 						</li>
 					</ul>
 				</li>
-				
-				<li><a href="#">V6 - Security Misconfiguration</a>
-					<ul>
-						<li><a href="<%=path%>/admin/">Default Admin Credentials not changed</a></li>
-                        <li><a href="<%=path%>/vulnerability/securitymisconfig/pages.jsp?id=1">Error Handling</a></li>
-
-					</ul>
+				 <li><a href="#">V6 - Unvalidated Redirect & Forward..</a>
+						<ul>
+							<li><a href="<%=path%>/vulnerability/unvalidated/OpenURL.jsp">Open Redirect</a></li>
+							<li><a href="<%=path%>/vulnerability/unvalidated/OpenForward.jsp">Open Forward</a></li>
+						</ul>
 				</li>
-				
 				<li><a href="#">V7 - Sensitive Data Exposure</a>
 					<ul>
 						<li><a href="<%=path%>/changeCardDetails.jsp">Cleartext Transmission of Sensitive Information</a></li>		
@@ -121,12 +116,7 @@
 						</ul>
 				</li>
                 
-                <li><a href="#">V10 - Unvalidated Redirect & Forward..</a>
-						<ul>
-							<li><a href="<%=path%>/vulnerability/unvalidated/OpenURL.jsp">Open Redirect</a></li>
-							<li><a href="<%=path%>/vulnerability/unvalidated/OpenForward.jsp">Open Forward</a></li>
-						</ul>
-				</li>
+               
 					 
 			</ul>
 		</li>

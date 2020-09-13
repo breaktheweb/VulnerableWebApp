@@ -62,7 +62,7 @@ public class Install extends HttpServlet {
        // adminuser= request.getParameter("adminuser");
         //adminpass= HashingUtil.hashPassword(request.getParameter("adminpass"));
         adminuser="admin";
-        adminpass="admin$1234";
+        adminpass=HashingUtil.hashPassword("admin$1234");
         //Moifying Configuration Properties:
          Properties config=new Properties();
          config.load(new FileInputStream(configPath));
