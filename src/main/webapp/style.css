@@ -20,7 +20,7 @@
 }
 body {
 	padding-top: 0px;
-	background:url("images/bw.png") #20230be0;
+	background:url("images/bg.png") #20230be0;
 	color: #6f8825f2;
 	font-family: verdana, arial, sans-serif;
 	
@@ -112,7 +112,7 @@ width:500px;
 }
 #menu-bar {
 	    background: #720080;
-width:680px;
+width:500px;
   margin: 0px 0px 0px 0px;
   padding: 6px 6px 0px 6px;
   height: 34px;

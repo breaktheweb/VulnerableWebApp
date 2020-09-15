@@ -25,7 +25,7 @@
 		<ul id="menu-bar" style="margin-left: auto ;  margin-right: auto ;" >
 			<li class="current"><a href="<%=path%>">Home</a></li>
 			
-			<li><a href="#">Possible Vulnerability</a>
+			<!-- <li><a href="#">Possible Vulnerability</a> -->
 				<ul>
 				
 			
